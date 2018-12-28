@@ -32,11 +32,11 @@ module TodoApi
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
-    # 以下追記
-    config.middleware.insert_before ActionDispatch::Static, Rack::Cors do
+    # # 以下追記
+    config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
-        resource '*', :headers => :any, :methods => [:get, :post, :delete]
+        resource '*', headers: :any, methods: [:get, :post, :options]
       end
     end
 

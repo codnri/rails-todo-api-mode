@@ -1,4 +1,5 @@
 class TodosController < ApplicationController
+    # before_filter :set_headers
     before_action :set_todo, only: [ :update, :destroy]
     # GET /todos
     def index
@@ -18,7 +19,8 @@ class TodosController < ApplicationController
     def create
       @todo = Todo.new(todo_params)
       # @todo = current_user.todos.build(todo_params)
-  
+
+
       if @todo.save
           render json: @todo, status: :created, location: @todo
       else
@@ -53,4 +55,11 @@ class TodosController < ApplicationController
       def set_todo
         @todo = Todo.find(params[:id])
       end
+      # def set_headers
+      #   headers['Access-Control-Allow-Origin'] = 'localhost:3000'
+      #   headers['Access-Control-Expose-Headers'] = 'ETag'
+      #   headers['Access-Control-Allow-Methods'] = 'GET, POST, PATCH, PUT, DELETE, OPTIONS, HEAD'
+      #   headers['Access-Control-Allow-Headers'] = '*,x-requested-with,Content-Type,If-Modified-Since,If-None-Match'
+      #   headers['Access-Control-Max-Age'] = '86400'
+      # end
 end
